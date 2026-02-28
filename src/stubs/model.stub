@@ -1,0 +1,57 @@
+<?php
+
+namespace {{ namespace }};
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+/**
+ * Classe {{ class }}
+ * * Gerada automaticamente pelo Laravel Clean Flow.
+ * Esta classe representa a camada de persistência para a entidade {{ class }}.
+ */
+class {{ class }} extends Model
+{    
+    // Descomente a linha abaixo caso for utilizar o soft delete na sua tabela
+    // use SoftDeletes;
+
+    /**
+     * O nome da tabela associada ao model.
+     * Por padrão, o Laravel utiliza o plural do nome da classe em snake_case.
+     *
+     * @var string
+     */
+    protected $table = '{{ table }}';
+
+    /**
+     * Atributos que podem ser atribuídos em massa (Mass Assignment).
+     * * Adicione aqui apenas os campos que o usuário pode enviar via formulário/API.
+     * Isso evita vulnerabilidades de segurança.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [ 
+        // Adicione os outros campos abaixo
+    ];
+
+    /**
+     * Conversão de tipos (Casts).
+     * * Define como os atributos devem ser transformados ao serem acessados ou salvos.
+     * Exemplo: 'is_active' => 'boolean', 'deleted_at' => 'datetime', 'atributos' => 'array'
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [       
+       // Adicione os cast abaixo se necessario caso sua tabela possua colunas com tipos diferentes de string
+    ];
+
+    /**
+     * Gestão automática de timestamps (created_at e updated_at).
+     *
+     * DESCOMENTE A LINHA ABAIXO APENAS SE:
+     * 1. A tabela no banco de dados NÃO possuir as colunas created_at e updated_at.
+     * 2. Você estiver integrando com um banco de dados legado que não segue o padrão Laravel.
+     */
+    // public $timestamps = false;
+}
