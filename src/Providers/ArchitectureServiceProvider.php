@@ -1,10 +1,10 @@
 <?php
-
 namespace EduardaLeal\CleanFlow\Providers;
+
 use Illuminate\Support\ServiceProvider;
-use GraficaJb\Arquitetura\Commands\MakeServiceCommand;
-use GraficaJb\Arquitetura\Commands\MakeRepositoryCommand;
-use GraficaJb\Arquitetura\Commands\MakeFlowCommand;
+use EduardaLeal\CleanFlow\Commands\MakeServiceCommand;
+use EduardaLeal\CleanFlow\Commands\MakeRepositoryCommand;
+use EduardaLeal\CleanFlow\Commands\MakeFlowCommand;
 
 class ArchitectureServiceProvider extends ServiceProvider
 {
