@@ -1,6 +1,6 @@
 <?php
 
-namespace GraficaJb\Arquitetura\Commands;
+namespace EduardaLeal\CleanFlow\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
