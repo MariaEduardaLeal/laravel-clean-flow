@@ -1,16 +1,16 @@
 {
-    "name": "graficajb/arquitetura-padrao",
-    "description": "Biblioteca interna para padronização arquitetural",
+    "name": "eduardaleal/laravel-clean-flow",
+    "description": "Biblioteca para geração de arquitetura limpa (Controller -> Service -> Repository) no Laravel.",
     "type": "library",
     "autoload": {
         "psr-4": {
-            "GraficaJb\\Arquitetura\\": "src/"
+            "EduardaLeal\\CleanFlow\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "GraficaJb\\Arquitetura\\Providers\\ArchitectureServiceProvider"
+                "EduardaLeal\\CleanFlow\\Providers\\ArchitectureServiceProvider"
             ]
         }
     }
