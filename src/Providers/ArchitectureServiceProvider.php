@@ -1,7 +1,6 @@
 <?php
 
-namespace GraficaJb\Arquitetura\Providers;
-
+namespace EduardaLeal\CleanFlow\Providers;
 use Illuminate\Support\ServiceProvider;
 use GraficaJb\Arquitetura\Commands\MakeServiceCommand;
 use GraficaJb\Arquitetura\Commands\MakeRepositoryCommand;
