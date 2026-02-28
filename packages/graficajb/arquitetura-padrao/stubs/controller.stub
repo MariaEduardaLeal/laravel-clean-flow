@@ -1,0 +1,37 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Services\{{ serviceName }};
+use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Exception;
+
+class {{ class }} extends Controller
+{
+    /**
+     * Método principal para lidar com a requisição.
+     * O retorno deve idealmente utilizar API Resources para padronização.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function handle_request(Request $request): JsonResponse
+    {
+        try {
+            // Repassa os dados para a camada de serviço processar
+            $process_result = {{ serviceName }}::execute_main_process($request->all());
+
+            return response()->json([
+                'status' => 'success',
+                'data' => $process_result
+            ], 200);
+
+        } catch (Exception $exception) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $exception->getMessage()
+            ], 400);
+        }
+    }
+}

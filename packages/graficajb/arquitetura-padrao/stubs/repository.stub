@@ -1,0 +1,30 @@
+<?php
+
+namespace {{ namespace }};
+
+use App\Models\{{ modelName }};
+use Illuminate\Support\Facades\Cache;
+
+class {{ class }}
+{
+
+    /**
+     * Busca registros paginados de {{ modelName }} no banco de dados.
+     * * IMPORTANTE:
+     * - Priorize paginação para listagens extensas.
+     * - Utilize cache para consultas repetitivas.
+     * - Certifique-se de que a tabela possua indexação adequada.
+     *
+     * @param int $per_page Quantidade de itens por página.
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public static function get_paginated_{{ modelVariablePlural }}(int $per_page = 15)
+    {
+        // Exemplo sugerido de cache com paginação:
+        // return Cache::remember('{{ modelVariablePlural }}_page_' . request('page', 1), 3600, function () use ($per_page) {
+        //     return {{ modelName }}::paginate($per_page);
+        // });
+
+        return {{ modelName }}::paginate($per_page);
+    }
+}

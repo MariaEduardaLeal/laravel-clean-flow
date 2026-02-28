@@ -1,0 +1,17 @@
+{
+    "name": "graficajb/arquitetura-padrao",
+    "description": "Biblioteca interna para padronização arquitetural",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "GraficaJb\\Arquitetura\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "GraficaJb\\Arquitetura\\Providers\\ArchitectureServiceProvider"
+            ]
+        }
+    }
+}

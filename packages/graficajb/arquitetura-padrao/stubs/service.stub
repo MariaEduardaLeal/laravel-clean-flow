@@ -1,0 +1,33 @@
+<?php
+
+namespace {{ namespace }};
+
+use Illuminate\Support\Facades\DB;
+use Exception;
+
+class {{ class }}
+{
+    /**
+     * Processa a regra de negócio principal.
+     * * IMPORTANTE: 
+     * - Utilize transactions em operações críticas de escrita.
+     * - Envie processos demorados para queues via Jobs.
+     *
+     * @param array ${{ baseVariable }}_data Dados validados vindos do Form Request.
+     * @return void
+     * @throws Exception
+     */
+    public static function process_{{ baseVariable }}(array ${{ baseVariable }}_data): void
+    {
+        DB::beginTransaction();
+
+        try {
+            // Insira a regra de negócio isolada aqui
+            
+            DB::commit();
+        } catch (Exception $exception) {
+            DB::rollBack();
+            throw $exception;
+        }
+    }
+}
