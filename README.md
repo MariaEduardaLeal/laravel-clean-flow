@@ -1,7 +1,5 @@
 # 🏗️ Gráfica JB - Padrão Arquitetural Laravel
 
-Biblioteca oficial da equipe de Engenharia da **Gráfica JB**. Desenvolvida para padronizar, acelerar e garantir a qualidade da arquitetura em nossos projetos Laravel.
-
 Esta ferramenta automatiza a criação de arquivos baseados no padrão **Controller → Service → Repository**, garantindo a aplicação de Clean Code, princípios SOLID e Injeção de Dependência logo no momento da geração do código.
 
 ---
