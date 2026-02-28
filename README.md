@@ -24,10 +24,10 @@ Para manter nossos sistemas escaláveis e fáceis de dar manutenção, este paco
 Como o pacote está publicado no Packagist, a instalação em qualquer projeto novo é feita com um único comando:
 
 ```bash
-composer require graficajb/arquitetura-padrao
+composer require eduardaleal/laravel-clean-flow
 ```
 
-> **Nota para ambientes conteinerizados:** Se o seu projeto estiver rodando com Docker (por exemplo, via Laravel Sail), lembre-se de rodar `./vendor/bin/sail composer require graficajb/arquitetura-padrao`.
+> **Nota para ambientes conteinerizados:** Se o seu projeto estiver rodando com Docker (por exemplo, via Laravel Sail), lembre-se de rodar `./vendor/bin/sail composer require eduardaleal/laravel-clean-flow`.
 
 A biblioteca utiliza o recurso de **Auto-Discovery** do Laravel, portanto, nenhum Service Provider precisa ser registrado manualmente. Instalou, está pronto para usar!
 

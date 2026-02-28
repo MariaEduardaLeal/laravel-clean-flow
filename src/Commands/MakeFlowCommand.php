@@ -13,7 +13,7 @@ class MakeFlowCommand extends Command
     public function handle()
     {
         $base_name = trim($this->argument('name'));
-        
+
         $service_name = $base_name . 'Service';
         $repository_name = $base_name . 'Repository';
         $controller_name = $base_name . 'Controller';
@@ -28,7 +28,7 @@ class MakeFlowCommand extends Command
         $this->call('make:service', ['name' => $service_name]);
 
         // 3. Gera o nosso Controller customizado e interligado
-        $this->generate_controller($controller_name, $service_name);
+        $this->generate_controller($controller_name, $service_name, $base_name);
 
         $this->info("Fluxo gerado com sucesso! Arquitetura isolada e pronta para o uso.");
     }
@@ -41,10 +41,10 @@ class MakeFlowCommand extends Command
      * @param string $service_name
      * @return void
      */
-    private function generate_controller(string $controller_name, string $service_name): void
+    private function generate_controller(string $controller_name, string $service_name, string $base_name): void
     {
         $stub_path = __DIR__ . '/../../stubs/controller.stub';
-        
+
         if (!file_exists($stub_path)) {
             $this->error("Stub do controller não encontrado.");
             return;
@@ -52,12 +52,11 @@ class MakeFlowCommand extends Command
 
         $stub_content = file_get_contents($stub_path);
 
-        // Transforma o nome do serviço para a variável em snake_case (ex: user_service)
-        $service_variable = Str::snake($service_name);
-        
+        $base_variable = Str::snake($base_name);
+
         $stub_content = str_replace(
-            ['{{ class }}', '{{ serviceName }}', '{{ serviceVariable }}'],
-            [$controller_name, $service_name, $service_variable],
+            ['{{ class }}', '{{ serviceName }}', '{{ baseVariable }}'],
+            [$controller_name, $service_name, $base_variable],
             $stub_content
         );
 

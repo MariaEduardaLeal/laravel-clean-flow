@@ -18,16 +18,14 @@ class {{ class }} extends Controller
      */
     public function handle_request(Request $request): JsonResponse
     {
-        try {
+            try {
             // Repassa os dados para a camada de serviço processar
-            $process_result = {{ serviceName }}::execute_main_process($request->all());
+            $process_result = {{ serviceName }}::process_{{ baseVariable }}($request->all());
 
             return response()->json([
                 'status' => 'success',
                 'data' => $process_result
             ], 200);
-
-        } catch (Exception $exception) {
             return response()->json([
                 'status' => 'error',
                 'message' => $exception->getMessage()
