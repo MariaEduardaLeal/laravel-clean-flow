@@ -1,0 +1,42 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Migration gerada automaticamente pelo Laravel Clean Flow.
+     * Caso de uso: Definição inicial da entidade {{ table }}.
+     */
+    public function up(): void
+    {
+        Schema::create('{{ table }}', function (Blueprint $table) {
+
+            // Comentário da tabela ATENÇÃO !!
+            $table->comment('Tabela gerada automaticamente pelo Laravel Clean Flow.');
+            
+            // ID da tabela
+            $table->id();
+            
+            // Campos da sua estrutura aqui ⬇️
+            
+            
+            
+            // Caso não utilize timestamps, remova esta linha e lembre de adicionar o timestamp = false no model
+            $table->timestamps(); 
+            
+            // Atenção !!
+            // Caso queira utilizar soft deletes, descomente esta linha, e lembre se for utilizar deve adicionar o softDeletes no use do model
+            // $table->softDeletes(); 
+        });
+    }
+
+    public function down(): void
+    {
+        // ATENÇÃO !!
+        
+        Schema::dropIfExists('{{ table }}'); // Comente este linha antes de commitar o código !!
+    }
+};

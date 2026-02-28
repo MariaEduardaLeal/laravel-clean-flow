@@ -13,7 +13,7 @@ class MakeRepositoryCommand extends GeneratorCommand
 
     protected function getStub(): string
     {
-        return __DIR__ . '/../../stubs/repository.stub';
+        return __DIR__ . '/../stubs/repository.stub';
     }
 
     protected function getDefaultNamespace($rootNamespace): string
@@ -43,7 +43,7 @@ class MakeRepositoryCommand extends GeneratorCommand
         // Extrai o nome base (ex: Se $name for App\Repositories\UsuarioRepository, pega "Usuario")
         $class_name = class_basename($name);
         $base_name = str_replace('Repository', '', $class_name);
-        
+
         // Aplica as regras de snake_case e pluralização
         $model_name = $base_name;
         $model_variable_plural = Str::plural(Str::snake($base_name)); // Ex: usuario -> usuarios

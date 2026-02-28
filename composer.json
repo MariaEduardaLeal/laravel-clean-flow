@@ -7,11 +7,30 @@
             "EduardaLeal\\CleanFlow\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "EduardaLeal\\CleanFlow\\Tests\\": "tests/"
+        }
+    },
     "extra": {
         "laravel": {
             "providers": [
                 "EduardaLeal\\CleanFlow\\Providers\\ArchitectureServiceProvider"
             ]
+        }
+    },
+    "require": {
+        "illuminate/console": "^10.0 || ^11.0 || ^12.0",
+        "illuminate/support": "^10.0 || ^11.0 || ^12.0"
+    },
+    "require-dev": {
+        "pestphp/pest": "^2.0 || ^3.0 || ^4.0",
+        "pestphp/pest-plugin-laravel": "^2.0 || ^3.0 || ^4.0",
+        "orchestra/testbench": "^8.0 || ^9.0 || ^10.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
         }
     }
 }

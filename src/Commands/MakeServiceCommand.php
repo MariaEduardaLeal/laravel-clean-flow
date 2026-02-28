@@ -13,7 +13,7 @@ class MakeServiceCommand extends GeneratorCommand
 
     protected function getStub(): string
     {
-        return __DIR__ . '/../../stubs/service.stub';
+        return __DIR__ . '/../stubs/service.stub';
     }
 
     protected function getDefaultNamespace($rootNamespace): string
@@ -41,7 +41,7 @@ class MakeServiceCommand extends GeneratorCommand
 
         $class_name = class_basename($name);
         $base_name = str_replace('Service', '', $class_name);
-        
+
         // Ex: Se baseName for "ProcessamentoPagamento", vira "processamento_pagamento"
         $base_variable = Str::snake($base_name);
 
