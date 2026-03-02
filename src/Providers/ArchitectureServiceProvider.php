@@ -1,10 +1,12 @@
 <?php
+
 namespace EduardaLeal\CleanFlow\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use EduardaLeal\CleanFlow\Commands\MakeServiceCommand;
 use EduardaLeal\CleanFlow\Commands\MakeRepositoryCommand;
 use EduardaLeal\CleanFlow\Commands\MakeFlowCommand;
+use EduardaLeal\CleanFlow\Commands\MakeViewCommand;
 
 class ArchitectureServiceProvider extends ServiceProvider
 {
@@ -30,6 +32,7 @@ class ArchitectureServiceProvider extends ServiceProvider
                 MakeServiceCommand::class,
                 MakeRepositoryCommand::class,
                 MakeFlowCommand::class,
+                MakeViewCommand::class,
             ]);
         }
     }
