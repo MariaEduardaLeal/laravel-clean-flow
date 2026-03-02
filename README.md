@@ -1,6 +1,6 @@
-# 🏗️ Gráfica JB - Padrão Arquitetural Laravel
+# 🏗️ Laravel Clean Flow - Padrão Arquitetural
 
-Esta ferramenta automatiza a criação de arquivos baseados no padrão **Controller → Service → Repository**, garantindo a aplicação de Clean Code, princípios SOLID e Injeção de Dependência logo no momento da geração do código.
+Esta ferramenta automatiza a criação de arquivos baseados no padrão **Controller → Service → Repository**, e também facilita a criação de Views (Blade e Vue), garantindo a aplicação de Clean Code, princípios SOLID e Injeção de Dependência logo no momento da geração do código.
 
 ---
 
@@ -11,7 +11,7 @@ Para manter nossos sistemas escaláveis e fáceis de dar manutenção, este paco
 1. **Controllers Enxutos:** O Controller serve **apenas** para receber a requisição HTTP e devolver a resposta. Nunca escreva regras de negócio aqui.
 2. **Services (Regras de Negócio):** Toda lógica, cálculos, envio de e-mails e processos complexos moram na camada de Service.
 3. **Repositories (Banco de Dados):** O acesso aos dados fica estritamente isolado nos Repositories. O Service pede os dados para o Repository.
-4. **Injeção de Dependência:** As classes geradas interagem através de injeção no construtor, facilitando a criação de *Mocks* e testes unitários. Não utilizamos métodos estáticos para regras de negócio.
+4. **Injeção de Dependência:** As classes geradas interagem através de injeção no construtor, facilitando a criação de _Mocks_ e testes unitários. Não utilizamos métodos estáticos para regras de negócio.
 5. **Padrão de Nomenclatura:** Todos os métodos, funções e variáveis geradas utilizam o padrão `snake_case`.
 6. **Documentação Rigorosa:** Todos os métodos gerados já incluem DocBlocks detalhados (`@param`, `@return`, `@throws`).
 
@@ -43,11 +43,11 @@ php artisan make:flow Agendamento
 
 **O que ele cria:**
 
-| Arquivo | Caminho |
-|---|---|
-| Model | `app/Models/Agendamento.php` |
-| Repository | `app/Repositories/AgendamentoRepository.php` |
-| Service | `app/Services/AgendamentoService.php` |
+| Arquivo    | Caminho                                          |
+| ---------- | ------------------------------------------------ |
+| Model      | `app/Models/Agendamento.php`                     |
+| Repository | `app/Repositories/AgendamentoRepository.php`     |
+| Service    | `app/Services/AgendamentoService.php`            |
 | Controller | `app/Http/Controllers/AgendamentoController.php` |
 
 - O **Repository** já vem com listagem paginada em `snake_case` plural: `get_paginated_agendamentos`
@@ -85,6 +85,36 @@ php artisan make:repository Cliente
 - Importação automática do Model `Cliente`
 - Método estruturado para paginação
 - DocBlocks educativos alertando a equipe sobre o uso de **Cache**, **Indexação** nas tabelas e o perigo de não utilizar Paginação em tabelas extensas
+
+---
+
+### 4. Criando Arquivos de View: `make:view` 🎨 Novo
+
+Gera arquivos de interface visual (`.blade.php` ou `.vue`) organizados na estrutura de pastas de recursos do seu projeto. Muito útil para quem trabalha com **Inertia.js** ou componentes Blade.
+
+**Exemplos de uso:**
+
+```bash
+# Cria uma view Blade padrão (resources/views/profile.blade.php)
+php artisan make:view profile
+
+# Cria um componente Blade (resources/views/components/button.blade.php)
+php artisan make:view button --component
+
+# Cria uma página Vue/Inertia (resources/js/Pages/Dashboard.vue)
+php artisan make:view Dashboard --vue
+
+# Cria um componente Vue (resources/js/Components/Modal.vue)
+php artisan make:view Modal --vue --component
+```
+
+**Como funciona a estrutura de pastas gerada:**
+
+| Opção         | Caminho para Blade (Padrão)                     | Caminho para Vue (`--vue`)             |
+| ------------- | ----------------------------------------------- | -------------------------------------- |
+| _(Nenhuma)_   | `resources/views/NomeView.blade.php`            | `resources/js/Pages/NomeView.vue`      |
+| `--component` | `resources/views/components/NomeView.blade.php` | `resources/js/Components/NomeView.vue` |
+| `--template`  | `resources/views/templates/NomeView.blade.php`  | `resources/js/Templates/NomeView.vue`  |
 
 ---
 
