@@ -19,24 +19,46 @@ class MakeFlowCommand extends Command
     {
         $base_name = trim($this->argument('name'));
 
-        $service_name = $base_name . 'Service';
-        $repository_name = $base_name . 'Repository';
-        $controller_name = $base_name . 'Controller';
+        // Verifica se o nome está em snake_case (e.g. contendo underscore e apenas minúsculas)
+        $is_snake_case = $base_name === Str::snake($base_name) && Str::contains($base_name, '_');
 
-        $this->info("Iniciando a criação do fluxo arquitetural para: {$base_name}...");
+        if ($is_snake_case) {
+            $choice = $this->choice(
+                "O nome '{$base_name}' está em snake_case. Deseja gerar todos os arquivos (classes e migration) usando snake_case, ou manter snake_case APENAS para a migration e usar StudlyCase para as classes?",
+                ['Apenas Migration (em snake_case) e Classes em StudlyCase', 'Tudo em snake_case (Arquitetura Completa)'],
+                0
+            );
+
+            if ($choice === 'Apenas Migration (em snake_case) e Classes em StudlyCase') {
+                $class_base_name = Str::studly($base_name);
+                $migration_base_name = $base_name;
+            } else {
+                $class_base_name = $base_name;
+                $migration_base_name = $base_name;
+            }
+        } else {
+            $class_base_name = $base_name;
+            $migration_base_name = $base_name;
+        }
+
+        $service_name = $class_base_name . 'Service';
+        $repository_name = $class_base_name . 'Repository';
+        $controller_name = $class_base_name . 'Controller';
+
+        $this->info("Iniciando a criação do fluxo arquitetural...");
 
         // Gera nosso model customizado a partir do stub
-        $this->generate_model($base_name);
+        $this->generate_model($class_base_name, $migration_base_name);
 
         // Chama os nossos geradores customizados da biblioteca
         $this->call('make:repository', ['name' => $repository_name]);
         $this->call('make:service', ['name' => $service_name]);
 
         // Gera o nosso Controller customizado e interligado
-        $this->generate_controller($controller_name, $service_name, $base_name);
+        $this->generate_controller($controller_name, $service_name, $class_base_name);
 
         // Gera a migration baseada no stub customizado
-        $this->generate_migration($base_name);
+        $this->generate_migration($migration_base_name);
 
         $this->info("☑️ Fluxo gerado com sucesso! Arquitetura isolada e pronta para o uso.");
     }
@@ -122,10 +144,11 @@ class MakeFlowCommand extends Command
     /**
      * Lê o stub do model, substitui os nomes e gera o arquivo do Model.
      *
-     * @param string $base_name
+     * @param string $class_base_name
+     * @param string $migration_base_name
      * @return void
      */
-    private function generate_model(string $base_name): void
+    private function generate_model(string $class_base_name, string $migration_base_name): void
     {
         $stub_path = __DIR__ . '/../stubs/model.stub';
 
@@ -136,15 +159,15 @@ class MakeFlowCommand extends Command
 
         $stub_content = file_get_contents($stub_path);
 
-        $table_name = Str::snake(Str::pluralStudly($base_name));
+        $table_name = Str::snake(Str::pluralStudly($migration_base_name));
 
         $stub_content = str_replace(
             ['{{ namespace }}', '{{ class }}', '{{ table }}'],
-            ['App\Models', $base_name, $table_name],
+            ['App\Models', $class_base_name, $table_name],
             $stub_content
         );
 
-        $model_path = app_path("Models/{$base_name}.php");
+        $model_path = app_path("Models/{$class_base_name}.php");
 
         // Cria a pasta Models caso não exista
         if (!file_exists(app_path('Models'))) {
@@ -152,6 +175,6 @@ class MakeFlowCommand extends Command
         }
 
         file_put_contents($model_path, $stub_content);
-        $this->line("<info>Model criado:</info> app/Models/{$base_name}.php");
+        $this->line("<info>Model criado:</info> app/Models/{$class_base_name}.php");
     }
 }
